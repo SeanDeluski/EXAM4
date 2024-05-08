@@ -33,7 +33,7 @@ def find_substrings(sequence, k):
 #finds all the possible substrings and their other substrings for all sequences
 def find_all_substrings(filename, k):
     """
-    finds all possible substrings and their other substrings for all sequences
+    -finds all possible substrings and their other substrings for all sequences
 
     arguments:
         filename(string): stores the sequence fragments file
@@ -77,7 +77,7 @@ def find_all_substrings(filename, k):
 #finds the smallest possible value of k where every substring has only one possible subsequent substring
 def find_smallest_k(filename):
     """
-    finds the smallest value of k where every substring has only one possible subsequent substring.
+    -finds the smallest value of k where every substring has only one possible subsequent substring.
 
     arguments:
         filename(string): stores the sequence fragments file
@@ -103,27 +103,24 @@ def find_smallest_k(filename):
 #defines a main funciton to run the script
 def main(filename):
     """
-    this function finds the smallest k value and prints the output
+    -this function finds the smallest k value and prints the output
 
     arguments:
         filename(string): stores the sequence fragments file
     """
+        #check if the arguments are provided
+    if len(sys.argv) != 2:
+        print("Usage: py.test genome_sequence.py ../../shared/439539/reads.fa")
+        sys.exit(1)
+    #takes the "filename" from the command line
+    filename = sys.argv[1]
     #finds the smallest k value
     smallest_k = find_smallest_k(filename)
     #prints the smallest k value
     print("Smallest value of k:", smallest_k)
     return smallest_k
 
-    
-    
-
 #checks if the script is being run as the main program
 if __name__ == "__main__":
-    #check if the arguments are provided
-    if len(sys.argv) != 2:
-        print("Usage: py.test genome_sequence.py ../../shared/439539/reads.fa")
-        sys.exit(1)
-    #takes the "filename" from the command line
-    filename = sys.argv[1]
     #calls the main function
     main(filename)  
