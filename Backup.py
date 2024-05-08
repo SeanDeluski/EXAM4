@@ -2,8 +2,6 @@
 import sys
 from collections import defaultdict
 
-filename = "test_sequences.txt"
-
 #finda all substrings of k and their next substrings
 def find_substrings(sequence, k):
     """
@@ -95,7 +93,7 @@ def find_smallest_k(filename):
         unique_next_substrings = {substring: set(next_substrings) for substring, next_substrings in substrings.items()}
         #makes sure each unique substring occurs once
         if all(len(next_substrings) == 1 for next_substrings in unique_next_substrings.values()):
-            #returns the k value
+            #returns the k vlaue
             return k
         #adds one to k after each loop  
         k += 1  
@@ -112,18 +110,43 @@ def main(filename):
     smallest_k = find_smallest_k(filename)
     #prints the smallest k value
     print("Smallest value of k:", smallest_k)
-    return smallest_k
-
-    
-    
+    #returns the smallest k value
+    return smallest_k  
 
 #checks if the script is being run as the main program
 if __name__ == "__main__":
     #check if the arguments are provided
     if len(sys.argv) != 2:
-        print("Usage: py.test genome_sequence.py ../../shared/439539/reads.fa")
+        print("Usage: python script.py ../../shared/439539/reads.fa")
         sys.exit(1)
     #takes the "filename" from the command line
     filename = sys.argv[1]
     #calls the main function
     main(filename)  
+
+
+
+
+import os
+import pytest
+from genome_sequence import find_substrings, find_all_substrings, find_smallest_k, main
+
+# Test find_substrings function
+def test_find_substrings():
+    sequence = "ATGTCTGTCTGAA"
+    k = 2
+    substrings = find_substrings(sequence, k)
+    assert substrings
+
+# Test find_all_substrings function 
+def test_find_all_substrings():
+    filename = "test_sequences.txt"
+    k = 2
+    all_substrings = find_all_substrings(filename, k)
+    assert all_substrings
+
+# Test find_smallest_k function
+def test_find_smallest_k():
+    filename = "test_sequences.txt"
+    smallest_k = main(filename)
+    assert isinstance(smallest_k, int)

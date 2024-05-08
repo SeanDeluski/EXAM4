@@ -1,0 +1,28 @@
+import os
+import pytest
+from genome_sequence.py import find_substrings, find_all_substrings, find_smallest_k
+
+def test_find_substrings():
+    sequence = "ATGTCTGTCTGAA"
+    k = 2
+    substrings = find_substrings(sequence, k)
+    assert substrings == {'AT': ['TG'], 'TG': ['GT', 'GA'], 'GT': ['TC'], 'TC': ['CT'], 'CT': ['TG'], 'GA': ['AA']}
+
+def test_find_all_substrings():
+    filename = "reads.fa"
+    k = 2
+    # Construct the full path to reads.fa assuming it's in a different directory
+    reads_path = os.path.join("../../shared/439539", "reads.fa")
+    all_substrings = find_all_substrings(reads_path, k)
+    assert all_substrings == {'AT': ['TG'], 'TG': ['GT', 'GA'], 'GT': ['TC'], 'TC': ['CT'], 'CT': ['TG'], 'GA': ['AA']}
+
+def test_find_smallest_k():
+    filename = "reads.fa"
+    # Construct the full path to reads.fa assuming it's in a different directory
+    reads_path = os.path.join("../../shared/439539", "reads.fa")
+    smallest_k = find_smallest_k(reads_path)
+    assert smallest_k == 2
+
+if __name__ == "__main__":
+    pytest.main()
+
